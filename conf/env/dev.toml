@@ -1,0 +1,12 @@
+
+[app]
+name = "gin-skeleton"
+host = "0.0.0.0"
+port = "8080"
+
+[mysql]
+host = "192.168.137.228"
+port = "3306"
+username = "root"
+password = "123456"
+database = "go_skeleton"
