@@ -37,7 +37,7 @@ func newDefaultMysql() *mysql {
 
 func newDefaultApp() *app {
 	return &app{
-		Host: "gin-skeleton",
+		Host: "127.0.0.1",
 		Port: "9090",
 	}
 }

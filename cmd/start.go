@@ -26,7 +26,7 @@ var runServerCmd = &cobra.Command{
 		routers.InitRouter(engine)
 
 		// start server
-		engine.Run(global.ConfigObj.App.GetAddr())
+		engine.Run(conf.ConfObj.App.GetAddr())
 		return nil
 	},
 }
