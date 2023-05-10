@@ -8,8 +8,7 @@ import (
 )
 
 var (
-	printVersion   bool
-	configFilePath string
+	printVersion bool
 )
 
 var RootCmd = &cobra.Command{
@@ -35,5 +34,5 @@ func Execute() {
 
 func init() {
 	RootCmd.PersistentFlags().BoolVarP(&printVersion, "version", "V", false, "if you need to print version")
-	RootCmd.PersistentFlags().StringVarP(&configFilePath, "conf", "f", "", "config file path")
+	RootCmd.PersistentFlags().StringVarP(&global.ConfigFilePath, "conf", "f", "/home/lifangjun/Desktop/go_study/gin_skeleton/conf/env/dev.toml", "config file path")
 }

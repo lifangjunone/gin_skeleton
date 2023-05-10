@@ -17,10 +17,7 @@ var runServerCmd = &cobra.Command{
 		engine := routers.InitEngine()
 
 		// init config
-		if configFilePath == "" {
-			configFilePath = global.ConfigFilePath
-		}
-		conf.InitConfig()
+		conf.InitConfig(global.ConfigFilePath)
 
 		// init middlewares
 		middlewares.InitMiddleware(engine)

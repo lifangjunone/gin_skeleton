@@ -1,7 +1,7 @@
 package conf
 
 import (
-	"gin_skeleton/global"
+	"fmt"
 	"github.com/BurntSushi/toml"
 )
 
@@ -13,11 +13,13 @@ func loadConfigFromFile(filePath string, confObj *Config) error {
 	return nil
 }
 
-func InitConfig() {
+func InitConfig(configFilePath string) {
 	confObj := NewConfig()
-	err := loadConfigFromFile(global.ConfigFilePath, confObj)
+	fmt.Println("2222222222")
+	fmt.Println(configFilePath)
+	fmt.Println("2222222222")
+	err := loadConfigFromFile(configFilePath, confObj)
 	if err != nil {
 		panic(err.Error())
 	}
-	global.ConfigObj = confObj
 }
