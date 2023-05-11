@@ -7,7 +7,8 @@ import (
 )
 
 type UserService interface {
-	GetUserById(id int) *models.User
+	GetUserById(user *models.User, id int)
+	CreateUser(user *models.User)
 }
 
 func init() {

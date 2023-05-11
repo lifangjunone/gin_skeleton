@@ -1,7 +1,13 @@
 package impl
 
 import (
+	"gin_skeleton/SkeletonExample/dao"
+	"gin_skeleton/SkeletonExample/ioc"
 	"gin_skeleton/SkeletonExample/models"
+)
+
+var (
+	userDao = ioc.DaoIocObj.GetSvc("daoUser").(dao.DaoUser)
 )
 
 type UserServiceImpl struct {
@@ -12,10 +18,10 @@ func NewUserServiceImpl() *UserServiceImpl {
 	return &UserServiceImpl{Name: "NewUserServiceImpl"}
 }
 
-func (u *UserServiceImpl) GetUserById(id int) *models.User {
-	return &models.User{
-		Id:       id,
-		Username: "张三",
-		Password: "123456",
-	}
+func (u *UserServiceImpl) GetUserById(user *models.User, id int) {
+	userDao.QueryById(user, id)
+}
+
+func (u *UserServiceImpl) CreateUser(user *models.User) {
+	userDao.Insert(user)
 }

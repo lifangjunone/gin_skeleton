@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"gin_skeleton/common/db"
 	"gin_skeleton/conf"
 	"gin_skeleton/global"
 	"gin_skeleton/middlewares"
@@ -17,7 +18,11 @@ var runServerCmd = &cobra.Command{
 		engine := routers.InitEngine()
 
 		// init config
-		conf.InitConfig(global.ConfigFilePath)
+		confObj := conf.InitConfig(global.ConfigFilePath)
+		global.ConfObj = confObj
+
+		// init db
+		db.InitDB()
 
 		// init middlewares
 		middlewares.InitMiddleware(engine)
@@ -26,7 +31,7 @@ var runServerCmd = &cobra.Command{
 		routers.InitRouter(engine)
 
 		// start server
-		engine.Run(conf.ConfObj.App.GetAddr())
+		engine.Run(global.ConfObj.App.GetAddr())
 		return nil
 	},
 }

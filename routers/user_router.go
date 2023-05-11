@@ -10,7 +10,7 @@ var (
 func InitUserRouter(r *gin.Engine) {
 	userApi := r.Group("/users")
 	userApi.GET("/:id", userController.GetUserById)
-	userApi.POST("")
+	userApi.POST("", userController.CreateUser)
 	userApi.DELETE("/:id")
 	userApi.PATCH("/:id")
 }

@@ -2,6 +2,7 @@ package controller
 
 import (
 	"gin_skeleton/SkeletonExample/ioc"
+	"gin_skeleton/SkeletonExample/models"
 	"gin_skeleton/SkeletonExample/service"
 	"gin_skeleton/common"
 	"github.com/gin-gonic/gin"
@@ -21,11 +22,12 @@ func newUserController() *userController {
 	return &userController{}
 }
 
-func (u *userController) GetUserById(context *gin.Context) {
-	id := context.Param("id")
+func (u *userController) GetUserById(ctx *gin.Context) {
+	id := ctx.Param("id")
 	intId, _ := strconv.Atoi(id)
-	user := userSvc.GetUserById(intId)
-	context.JSON(http.StatusOK, resp.Success(user))
+	user := models.NewDefault()
+	userSvc.GetUserById(user, intId)
+	ctx.JSON(http.StatusOK, resp.Success(user))
 	return
 }
 
@@ -33,8 +35,18 @@ func (u *userController) DeleteUserById() *common.Result {
 	return resp.SuccessNotData()
 }
 
-func (u *userController) CreateUserById() *common.Result {
-	return resp.SuccessNotData()
+func (u *userController) CreateUser(ctx *gin.Context) {
+	user := models.NewDefault()
+	ctx.ShouldBindJSON(user)
+	formUser := user.UserForm
+	res := formUser.Validate()
+	if res != "" {
+		ctx.JSON(http.StatusOK, resp.Error(res))
+		return
+	}
+	userSvc.CreateUser(user)
+	ctx.JSON(http.StatusOK, resp.Success(user))
+	return
 }
 
 func (u *userController) UpdateUserById() *common.Result {

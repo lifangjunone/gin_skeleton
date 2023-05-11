@@ -7,10 +7,6 @@ import (
 	"path/filepath"
 )
 
-var (
-	ConfObj *Config
-)
-
 func loadConfigFromFile(filePath string, confObj *Config) error {
 	cur, _ := os.Getwd()
 	filename := filepath.Join(cur, "conf/dev/dev.toml")
@@ -22,11 +18,11 @@ func loadConfigFromFile(filePath string, confObj *Config) error {
 	return nil
 }
 
-func InitConfig(configFilePath string) {
+func InitConfig(configFilePath string) *Config {
 	confObj := NewConfig()
 	err := loadConfigFromFile(configFilePath, confObj)
 	if err != nil {
 		panic(err.Error())
 	}
-	ConfObj = confObj
+	return confObj
 }
