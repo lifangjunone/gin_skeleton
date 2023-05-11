@@ -4,7 +4,13 @@ import (
 	"gin_skeleton/SkeletonExample/models"
 )
 
-type UserServiceImpl struct{}
+type UserServiceImpl struct {
+	Name string
+}
+
+func NewUserServiceImpl() *UserServiceImpl {
+	return &UserServiceImpl{Name: "NewUserServiceImpl"}
+}
 
 func (u *UserServiceImpl) GetUserById(id int) *models.User {
 	return &models.User{
@@ -12,8 +18,4 @@ func (u *UserServiceImpl) GetUserById(id int) *models.User {
 		Username: "张三",
 		Password: "123456",
 	}
-}
-
-func NewUserServiceImpl() *UserServiceImpl {
-	return &UserServiceImpl{}
 }

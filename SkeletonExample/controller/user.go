@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"gin_skeleton/SkeletonExample/ioc"
 	"gin_skeleton/SkeletonExample/service"
 	"gin_skeleton/common"
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,7 @@ import (
 var (
 	UserController *userController
 	resp           = common.Resp
-	userService    = service.UserSvc
+	userSvc        = ioc.SvcIocObj.GetSvc("UserService").(service.UserService)
 )
 
 type userController struct{}
@@ -23,7 +24,7 @@ func newUserController() *userController {
 func (u *userController) GetUserById(context *gin.Context) {
 	id := context.Param("id")
 	intId, _ := strconv.Atoi(id)
-	user := userService.GetUserById(intId)
+	user := userSvc.GetUserById(intId)
 	context.JSON(http.StatusOK, resp.Success(user))
 	return
 }

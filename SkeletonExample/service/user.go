@@ -1,12 +1,9 @@
 package service
 
 import (
+	"gin_skeleton/SkeletonExample/ioc"
 	"gin_skeleton/SkeletonExample/models"
 	"gin_skeleton/SkeletonExample/service/impl"
-)
-
-var (
-	UserSvc UserService
 )
 
 type UserService interface {
@@ -14,5 +11,5 @@ type UserService interface {
 }
 
 func init() {
-	UserSvc = impl.NewUserServiceImpl()
+	ioc.SvcIocObj.Registry("UserService", impl.NewUserServiceImpl())
 }
