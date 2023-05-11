@@ -5,6 +5,7 @@ import "fmt"
 type Config struct {
 	App   *app   `toml:"app"`
 	Mysql *mysql `toml:"mysql"`
+	Mongo *mongo `toml:"mongo"`
 }
 
 type app struct {
@@ -16,6 +17,14 @@ type app struct {
 type mysql struct {
 	Host     string `toml:"host" env:"MYSQL_HOST"`
 	Port     string `toml:"port" env:"MYSQL_PORT"`
+	UserName string `toml:"username" env:"MYSQL_USERNAME"`
+	Password string `toml:"password" env:"MYSQL_PASSWORD"`
+	Database string `toml:"database" env:"MYSQL_DATABASE"`
+}
+
+type mongo struct {
+	Host     string `toml:"host" env:"MONGO_HOST"`
+	Port     string `toml:"port" env:"MONGO_PORT"`
 	UserName string `toml:"username" env:"MYSQL_USERNAME"`
 	Password string `toml:"password" env:"MYSQL_PASSWORD"`
 	Database string `toml:"database" env:"MYSQL_DATABASE"`

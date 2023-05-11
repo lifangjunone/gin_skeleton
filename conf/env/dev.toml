@@ -10,3 +10,10 @@ port = "3306"
 username = "root"
 password = "123456"
 database = "go_skeleton"
+
+[mongo]
+host = "192.168.137.228"
+port = "27017"
+username = "admin"
+password = "admin"
+database = "go_skeleton"

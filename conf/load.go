@@ -1,17 +1,20 @@
 package conf
 
 import (
-	"fmt"
 	"github.com/BurntSushi/toml"
 	"os"
 	"path/filepath"
 )
 
 func loadConfigFromFile(filePath string, confObj *Config) error {
-	cur, _ := os.Getwd()
-	filename := filepath.Join(cur, "conf/dev/dev.toml")
-	fmt.Println(filename)
-	_, err := toml.DecodeFile(filePath, confObj)
+	var filename string
+	if filePath == "" {
+		cur, _ := os.Getwd()
+		filename = filepath.Join(cur, "conf/dev/dev.toml")
+	} else {
+		filename = filePath
+	}
+	_, err := toml.DecodeFile(filename, confObj)
 	if err != nil {
 		return err
 	}

@@ -6,8 +6,8 @@ import (
 )
 
 type UserForm struct {
-	Username string `form:"username" json:"username" binding:"required"`
-	Password string `form:"password" json:"password" binding:"required"`
+	Username string `form:"username" json:"username" binding:"required" bson:"username"`
+	Password string `form:"password" json:"password" binding:"required" bson:"password"`
 }
 
 func (u *UserForm) Validate() string {
