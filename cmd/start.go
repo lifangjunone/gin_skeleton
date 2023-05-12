@@ -21,8 +21,11 @@ var runServerCmd = &cobra.Command{
 		confObj := conf.InitConfig(global.ConfigFilePath)
 		global.ConfObj = confObj
 
-		// init db
-		db.InitDB()
+		// init mysql db
+		db.InitMysqlDB()
+
+		// init mongo db
+		db.InitMongoDB()
 
 		// init middlewares
 		middlewares.InitMiddleware(engine)
