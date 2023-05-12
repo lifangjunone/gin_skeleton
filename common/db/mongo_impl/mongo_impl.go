@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gin_skeleton/conf"
 	"gin_skeleton/global"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -21,6 +22,25 @@ func NewMongoDb() *MongoDb {
 	return &MongoDb{
 		Conf: global.ConfObj,
 	}
+}
+
+func (m *MongoDb) InsertOne(colName string, data interface{}) {
+	coll := m.MDB.Collection(colName)
+	coll.InsertOne(context.Background(), data)
+}
+
+func (m *MongoDb) QueryByUsername(colName string, username string) interface{} {
+	coll := m.MDB.Collection(colName)
+	filter := bson.D{{"username", username}}
+	data := coll.FindOne(context.Background(), filter)
+	return data
+}
+
+func (m *MongoDb) QueryById(colName string, id string) interface{} {
+	coll := m.MDB.Collection(colName)
+	filter := bson.D{{"id", id}}
+	data := coll.FindOne(context.Background(), filter)
+	return data
 }
 
 func (m *MongoDb) getMongoClient() *mongo.Client {

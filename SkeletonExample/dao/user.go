@@ -12,5 +12,5 @@ type DaoUser interface {
 }
 
 func init() {
-	ioc.DaoIocObj.Registry("daoUser", impl.NewDaoUser())
+	ioc.DaoIocObj.Registry("daoUser", impl.NewDaoMysqlUser())
 }
