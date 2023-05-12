@@ -3,7 +3,6 @@ package tests
 import (
 	"context"
 	"fmt"
-	"gin_skeleton/SkeletonExample/form"
 	"gin_skeleton/SkeletonExample/models"
 	"gin_skeleton/conf"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -38,11 +37,9 @@ func TestMongo(t *testing.T) {
 	fmt.Println("mongo test")
 	mCli := getMongoClient()
 	coll := mCli.Database("go_skeleton").Collection("test")
-	var user = models.User{
-		Form: &form.UserForm{},
-	}
-	user.Form.Username = "root"
-	user.Form.Password = "123456"
+	var user = models.NewDefaultUser()
+	user.UserForm.Username = "天道"
+	user.UserForm.Password = "123456"
 	user.Id = 1
 	user.Hobby = "玩"
 	user.Sex = "男"

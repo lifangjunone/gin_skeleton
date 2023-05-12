@@ -25,7 +25,7 @@ func newUserController() *userController {
 func (u *userController) GetUserById(ctx *gin.Context) {
 	id := ctx.Param("id")
 	intId, _ := strconv.Atoi(id)
-	user := models.NewDefault()
+	user := models.NewDefaultUser()
 	userSvc.GetUserById(user, intId)
 	ctx.JSON(http.StatusOK, resp.Success(user))
 	return
@@ -36,7 +36,7 @@ func (u *userController) DeleteUserById() *common.Result {
 }
 
 func (u *userController) CreateUser(ctx *gin.Context) {
-	user := models.NewDefault()
+	user := models.NewDefaultUser()
 	ctx.ShouldBindJSON(user)
 	formUser := user.UserForm
 	res := formUser.Validate()
