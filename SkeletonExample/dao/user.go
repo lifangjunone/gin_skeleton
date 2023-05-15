@@ -9,6 +9,7 @@ import (
 type DaoUser interface {
 	Insert(u *models.User)
 	QueryById(user *models.User, id interface{})
+	QueryByField(map[string]interface{}) *[]models.User
 }
 
 func init() {

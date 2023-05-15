@@ -9,6 +9,7 @@ import (
 type UserService interface {
 	GetUserById(user *models.User, id interface{})
 	CreateUser(user *models.User)
+	QueryByField(map[string]interface{}) (users *[]models.User)
 }
 
 func init() {

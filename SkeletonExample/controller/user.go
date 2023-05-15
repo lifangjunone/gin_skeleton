@@ -29,6 +29,14 @@ func (u *userController) GetUserById(ctx *gin.Context) {
 	return
 }
 
+func (u *userController) GetByField(ctx *gin.Context) {
+	jsonParams := make(map[string]interface{})
+	ctx.BindJSON(&jsonParams)
+	users := userSvc.QueryByField(jsonParams)
+	ctx.JSON(http.StatusOK, resp.Success(users))
+	return
+}
+
 func (u *userController) DeleteUserById() *common.Result {
 	return resp.SuccessNotData()
 }

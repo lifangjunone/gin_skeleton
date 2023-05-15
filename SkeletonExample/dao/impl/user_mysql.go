@@ -18,3 +18,7 @@ func (d *DaoUserMysqlImpl) Insert(u *models.User) {
 func (d *DaoUserMysqlImpl) QueryById(user *models.User, id interface{}) {
 	db.DB.QueryById(user, id)
 }
+
+func (d *DaoUserMysqlImpl) QueryByField(user *models.User) *[]models.User {
+	return nil
+}

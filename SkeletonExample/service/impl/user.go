@@ -25,3 +25,7 @@ func (u *UserServiceImpl) GetUserById(user *models.User, id interface{}) {
 func (u *UserServiceImpl) CreateUser(user *models.User) {
 	userDao.Insert(user)
 }
+
+func (u *UserServiceImpl) QueryByField(jsonParam map[string]interface{}) *[]models.User {
+	return userDao.QueryByField(jsonParam)
+}

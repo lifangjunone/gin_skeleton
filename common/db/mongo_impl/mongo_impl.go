@@ -47,6 +47,25 @@ func (m *MongoDb) QueryById(colName string, id string, user *models.User) {
 	data.Decode(user)
 }
 
+func (m *MongoDb) QueryByField(colName string, jsonParam map[string]interface{}) (users *[]models.User) {
+	coll := m.MDB.Collection(colName)
+	var key string
+	var value interface{}
+	for k, v := range jsonParam {
+		key = k
+		value = v
+	}
+	users = new([]models.User)
+	filter := bson.M{key: value}
+	cur, _ := coll.Find(context.TODO(), filter)
+	err := cur.All(context.TODO(), users)
+	if err != nil {
+		fmt.Println(err.Error())
+		return nil
+	}
+	return
+}
+
 func (m *MongoDb) getMongoClient() *mongo.Client {
 
 	MongoURL := fmt.Sprintf("mongodb://%s:%s@%s:%s",
