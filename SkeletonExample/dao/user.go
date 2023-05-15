@@ -8,9 +8,10 @@ import (
 
 type DaoUser interface {
 	Insert(u *models.User)
-	QueryById(user *models.User, id int)
+	QueryById(user *models.User, id interface{})
 }
 
 func init() {
-	ioc.DaoIocObj.Registry("daoUser", impl.NewDaoMysqlUser())
+	//ioc.DaoIocObj.Registry("daoUser", impl.NewDaoMysqlUser())
+	ioc.DaoIocObj.Registry("daoUser", impl.NewDaoMongoUser())
 }

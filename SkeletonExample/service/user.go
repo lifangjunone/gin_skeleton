@@ -7,7 +7,7 @@ import (
 )
 
 type UserService interface {
-	GetUserById(user *models.User, id int)
+	GetUserById(user *models.User, id interface{})
 	CreateUser(user *models.User)
 }
 

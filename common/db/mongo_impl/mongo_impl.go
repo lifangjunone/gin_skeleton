@@ -3,9 +3,11 @@ package mongo_impl
 import (
 	"context"
 	"fmt"
+	"gin_skeleton/SkeletonExample/models"
 	"gin_skeleton/conf"
 	"gin_skeleton/global"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -36,11 +38,13 @@ func (m *MongoDb) QueryByUsername(colName string, username string) interface{} {
 	return data
 }
 
-func (m *MongoDb) QueryById(colName string, id string) interface{} {
+func (m *MongoDb) QueryById(colName string, id string, user *models.User) {
 	coll := m.MDB.Collection(colName)
-	filter := bson.D{{"id", id}}
+	id_, _ := primitive.ObjectIDFromHex(id)
+	filter := bson.M{"_id": id_}
+	fmt.Println(filter)
 	data := coll.FindOne(context.Background(), filter)
-	return data
+	data.Decode(user)
 }
 
 func (m *MongoDb) getMongoClient() *mongo.Client {

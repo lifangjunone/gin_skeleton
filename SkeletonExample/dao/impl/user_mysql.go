@@ -15,6 +15,6 @@ func (d *DaoUserMysqlImpl) Insert(u *models.User) {
 	db.DB.Save(u)
 }
 
-func (d *DaoUserMysqlImpl) QueryById(user *models.User, id int) {
+func (d *DaoUserMysqlImpl) QueryById(user *models.User, id interface{}) {
 	db.DB.QueryById(user, id)
 }

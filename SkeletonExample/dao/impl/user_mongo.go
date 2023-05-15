@@ -3,7 +3,6 @@ package impl
 import (
 	"gin_skeleton/SkeletonExample/models"
 	"gin_skeleton/common/db"
-	"strconv"
 )
 
 var colName = "user"
@@ -18,6 +17,6 @@ func (d *DaoUserMongoImpl) Insert(u *models.User) {
 	db.MDB.InsertOne(colName, u)
 }
 
-func (d *DaoUserMongoImpl) QueryById(user *models.User, id int) {
-	db.MDB.QueryById(colName, strconv.Itoa(id))
+func (d *DaoUserMongoImpl) QueryById(user *models.User, id interface{}) {
+	db.MDB.QueryById(colName, id.(string), user)
 }

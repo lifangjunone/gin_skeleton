@@ -7,7 +7,6 @@ import (
 	"gin_skeleton/common"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strconv"
 )
 
 var (
@@ -24,9 +23,8 @@ func newUserController() *userController {
 
 func (u *userController) GetUserById(ctx *gin.Context) {
 	id := ctx.Param("id")
-	intId, _ := strconv.Atoi(id)
 	user := models.NewDefaultUser()
-	userSvc.GetUserById(user, intId)
+	userSvc.GetUserById(user, id)
 	ctx.JSON(http.StatusOK, resp.Success(user))
 	return
 }

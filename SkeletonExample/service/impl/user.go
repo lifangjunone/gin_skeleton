@@ -18,7 +18,7 @@ func NewUserServiceImpl() *UserServiceImpl {
 	return &UserServiceImpl{Name: "NewUserServiceImpl"}
 }
 
-func (u *UserServiceImpl) GetUserById(user *models.User, id int) {
+func (u *UserServiceImpl) GetUserById(user *models.User, id interface{}) {
 	userDao.QueryById(user, id)
 }
 

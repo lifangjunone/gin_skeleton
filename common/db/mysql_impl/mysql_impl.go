@@ -20,7 +20,7 @@ func (g *MysqlDb) Update(o interface{}) {
 	g.Db.Updates(o)
 }
 
-func (g *MysqlDb) QueryById(user *models.User, id int) {
+func (g *MysqlDb) QueryById(user *models.User, id interface{}) {
 	g.Db.First(user, id)
 }
 
